@@ -1,12 +1,12 @@
 " Map <C-x><C-m> for our custom completion
-inoremap <C-x><C-m> <C-r>=MyComplete()<CR>
+inoremap <C-x><C-m> <C-r>=PenComplete()<CR>
 
 " Make subsequent <C-m> presses after <C-x><C-m> go to the next entry (just like
 " other <C-x>* mappings)
-inoremap <expr> <C-m> pumvisible() ?  "\<C-n>" : "\<C-m>"
+" inoremap <expr> <C-m> pumvisible() ?  "\<C-n>" : "\<C-m>"
 
 " Complete function for addresses; we match the name & address
-fun! MyComplete()
+fun! PenComplete()
     " The data. In this example it's static, but you could read it from a file,
     " get it from a command, etc.
     let l:data = [
