@@ -60,7 +60,7 @@ function! Prompt(fun, ...)
     endfor
 
     let cmd = a:fun . s
-    " let s = system("penf -u " . cmd, @p)
+    let s = system("penf -u " . cmd, @p)
     let @p = s
 
     " paste from p register
