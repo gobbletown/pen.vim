@@ -1,2 +1,33 @@
 * Pen.vim
 A plugin for integrating Pen.el with vim.
+
+** Prerequesites
+- https://semiosis.github.io/posts/pen-el-installation-from-scratch/
+
+Once installed, =Pen.el= has a script =pen= which =pen.vim= will use to run the prompts.
+
+** Code
++ GitHub repo :: http://github.com/semiosis/pen.vim
+
+#+BEGIN_SRC vimrc -n :async :results verbatim code
+  function! Prompt(fun, ...)
+      let args = a:000
+      let s = ""
+      " skip the first of the variadic args because it's the input
+      for arg in args[1:]
+          let s = s . ' "' . arg . '"'
+      endfor
+  
+      let cmd = a:fun . s
+      let s = system("penf -u " . cmd, @p)
+      let @p = s
+  
+      " paste from p register
+      exe "normal! gv\"pp"
+  endfunction
+  
+  xnoremap Zt "py:silent! call Prompt("pf-transform-code/3", @p, "vim", input("transformation: "))<CR>
+#+END_SRC
+
+** Demo
+- https://asciinema.org/a/u5hEs6O9pZALmLeyr4e8SBE4v
